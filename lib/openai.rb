@@ -12,7 +12,7 @@ module OpenAI
   class ConfigurationError < Error; end
 
   class Configuration
-    attr_writer :access_token
+    attr_writer :access_token, :http_proxy
     attr_accessor :api_version, :organization_id, :uri_base, :request_timeout
 
     DEFAULT_API_VERSION = "v1".freeze
@@ -23,6 +23,7 @@ module OpenAI
       @access_token = nil
       @api_version = DEFAULT_API_VERSION
       @organization_id = nil
+      @http_proxy = nil
       @uri_base = DEFAULT_URI_BASE
       @request_timeout = DEFAULT_REQUEST_TIMEOUT
     end
@@ -31,6 +32,13 @@ module OpenAI
       return @access_token if @access_token
 
       error_text = "OpenAI access token missing! See https://github.com/alexrudall/ruby-openai#usage"
+      raise ConfigurationError, error_text
+    end
+
+    def http_proxy
+      return @http_proxy if @http_proxy
+
+      error_text = "OpenAI http proxy missing! See https://github.com/alexrudall/ruby-openai#usage"
       raise ConfigurationError, error_text
     end
   end

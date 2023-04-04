@@ -1,8 +1,9 @@
 module OpenAI
   class Client
-    def initialize(access_token: nil, organization_id: nil, uri_base: nil, request_timeout: nil)
+    def initialize(access_token: nil, organization_id: nil, http_proxy: nil, uri_base: nil, request_timeout: nil)
       OpenAI.configuration.access_token = access_token if access_token
       OpenAI.configuration.organization_id = organization_id if organization_id
+      OpenAI.configuration.http_proxy = http_proxy if http_proxy
       OpenAI.configuration.uri_base = uri_base if uri_base
       OpenAI.configuration.request_timeout = request_timeout if request_timeout
     end
